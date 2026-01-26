@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title class="ion-text-center">
+      <ion-avatar class="header-avatar" (click)="goHome()">
+        <ion-img src="assets/logo.jpg" alt="Logo"></ion-img>
+      </ion-avatar>
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-searchbar
+    [(ngModel)]="searchTerm"
+    (ionInput)="onSearchChange($event)"
+    placeholder="Buscar por título o sinopsis"
+    animated="true"
+    showClearButton="always"
+  ></ion-searchbar>
+
+  <div *ngIf="isLoading" class="ion-text-center">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <ion-list *ngIf="!isLoading">
+    @for (noticia of filteredNoticias; track noticia._id) {
+      <ion-card (click)="goToNoticiasDetail(noticia._id)">
+        <ion-card-header>
+          <ion-card-title class="ion-text-capitalize">
+            {{ noticia.title }}
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="card-content">
+            <ion-thumbnail>
+              <ion-img [src]="noticia.images" alt="Imagen de {{noticia.title}}"></ion-img>
+            </ion-thumbnail>
+            <div class="card-details">
+              <div class="categories">
+                <ion-chip class="category-chip">
+                  {{ noticia.section }}
+                </ion-chip>
+              </div>
+              <p class="release-date">
+                <b>Fecha:</b> {{ noticia.date | date:'dd/MM/yyyy' }}
+              </p>
+              <!-- Arreglo: sinopsis -->
+              <p class="synopsis">
+                <b>Contenido:</b> {{ noticia.content }}
+              </p>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    }
+    @if (filteredNoticias.length === 0 && searchTerm) {
+      <ion-item>
+        <ion-label class="ion-text-center">
+          No se encontraron resultados para "{{ searchTerm }}"
+        </ion-label>
+      </ion-item>
+    }
+  </ion-list>
+</ion-content>

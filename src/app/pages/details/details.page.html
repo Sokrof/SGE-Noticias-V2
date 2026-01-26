@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- Botón de retroceso -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+
+    <!-- Logo centrado que lleva al inicio -->
+    <ion-title class="ion-text-center">
+      <ion-avatar class="header-avatar" (click)="goHome()">
+        <ion-img src="assets/logo.jpg" alt="Logo"></ion-img>
+      </ion-avatar>
+    </ion-title>
+
+    <!-- Botón del menú -->
+    <ion-buttons slot="end">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding force-dark-mode">
+  <!-- Detalles  -->
+  <div class="details-container" *ngIf="noticia">
+    <ion-img [src]="noticia.images" alt="Imagen de la noticia"></ion-img>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ noticia.title }}</ion-card-title>
+        <ion-card-subtitle>{{ noticia.subtitle }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="categories">
+          <ion-chip>
+            {{ noticia.section }}
+          </ion-chip>
+        </div>
+        <p><b>Autor:</b> {{ noticia.author }}</p>
+        <p><b>Fecha:</b> {{ noticia.date | date:'dd/MM/yyyy' }}</p>
+        <p><b>Contenido:</b> {{ noticia.content }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

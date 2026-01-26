@@ -1,0 +1,89 @@
+// For information on how to create your own theme, please see:
+// http://ionicframework.com/docs/theming/
+// src/theme/variables.scss
+
+// FORZAMOS el modeo Oscuro para que incluso en navegadores con modo CLaro se vea igual (En modo claro se ve horrible)
+:root {
+  /** primary **/
+  --ion-color-primary: #E50914;
+  --ion-color-primary-rgb: 229, 9, 20;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #ca0812;  /* 10% más oscuro */
+  --ion-color-primary-tint: #e82730;   /* 10% más claro */
+
+  --ion-background-color: #141414;
+  --ion-background-color-rgb: 20, 20, 20;
+  --ion-text-color: #ffffff;
+  --ion-text-color-rgb: 255, 255, 255;
+  --ion-border-color: #333333;
+
+  --ion-card-background: #1f1f1f;
+  --ion-item-background: #1f1f1f;
+  --ion-toolbar-background: #1f1f1f;
+  --ion-tab-bar-background: #1f1f1f;
+
+  --ion-color-step-50: #1e1e1e;
+  --ion-color-step-100: #2a2a2a;
+  --ion-color-step-150: #363636;
+  --ion-color-step-200: #414141;
+  --ion-color-step-250: #4d4d4d;
+  --ion-color-step-300: #595959;
+  --ion-color-step-350: #656565;
+  --ion-color-step-400: #717171;
+  --ion-color-step-450: #7d7d7d;
+  --ion-color-step-500: #898989;
+  --ion-color-step-550: #949494;
+  --ion-color-step-600: #a0a0a0;
+  --ion-color-step-650: #acacac;
+  --ion-color-step-700: #b8b8b8;
+  --ion-color-step-750: #c4c4c4;
+  --ion-color-step-800: #d0d0d0;
+  --ion-color-step-850: #dbdbdb;
+  --ion-color-step-900: #e7e7e7;
+  --ion-color-step-950: #f3f3f3;
+}
+
+// Modificamos también el light para que sea igual y asi forzamos
+@media (prefers-color-scheme: light) {
+  :root {
+    /** primary **/
+    --ion-color-primary: #E50914;
+    --ion-color-primary-rgb: 229, 9, 20;
+    --ion-color-primary-contrast: #ffffff;
+    --ion-color-primary-contrast-rgb: 255, 255, 255;
+    --ion-color-primary-shade: #ca0812;  /* 10% más oscuro */
+    --ion-color-primary-tint: #e82730;   /* 10% más claro */
+
+    --ion-background-color: #141414;
+    --ion-background-color-rgb: 20, 20, 20;
+    --ion-text-color: #ffffff;
+    --ion-text-color-rgb: 255, 255, 255;
+    --ion-border-color: #333333;
+
+    --ion-card-background: #1f1f1f;
+    --ion-item-background: #1f1f1f;
+    --ion-toolbar-background: #1f1f1f;
+    --ion-tab-bar-background: #1f1f1f;
+
+    --ion-color-step-50: #1e1e1e;
+    --ion-color-step-100: #2a2a2a;
+    --ion-color-step-150: #363636;
+    --ion-color-step-200: #414141;
+    --ion-color-step-250: #4d4d4d;
+    --ion-color-step-300: #595959;
+    --ion-color-step-350: #656565;
+    --ion-color-step-400: #717171;
+    --ion-color-step-450: #7d7d7d;
+    --ion-color-step-500: #898989;
+    --ion-color-step-550: #949494;
+    --ion-color-step-600: #a0a0a0;
+    --ion-color-step-650: #acacac;
+    --ion-color-step-700: #b8b8b8;
+    --ion-color-step-750: #c4c4c4;
+    --ion-color-step-800: #d0d0d0;
+    --ion-color-step-850: #dbdbdb;
+    --ion-color-step-900: #e7e7e7;
+    --ion-color-step-950: #f3f3f3;
+  }
+}

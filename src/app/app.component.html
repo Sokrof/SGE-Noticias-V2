@@ -1,0 +1,34 @@
+<ion-app>
+  <ion-menu side="end"
+            menuId="main-menu"
+            contentId="main"
+            type="overlay"
+            [swipeGesture]="true">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Menú</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list *ngIf="categories.length > 0">
+        <ion-list-header>
+          <ion-label>Secciones</ion-label>
+        </ion-list-header>
+
+        <ion-menu-toggle auto-hide="true">
+          <ion-item *ngFor="let category of categories"
+                    (click)="selectCategory(category.name)"
+                    button
+                    class="category-item">
+            <ion-avatar slot="start">
+              <ion-img [src]="category.icon" [alt]="category.name"></ion-img>
+            </ion-avatar>
+            <ion-label>{{ category.name }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>

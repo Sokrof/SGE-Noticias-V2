@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- Botón de retroceso -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+
+    <!-- Logo centrado que lleva al inicio -->
+    <ion-title class="ion-text-center">
+      <ion-avatar class="header-avatar" (click)="goHome()">
+        <ion-img src="assets/logo.jpg" alt="Logo"></ion-img>
+      </ion-avatar>
+    </ion-title>
+
+    <!-- Botón del menú -->
+    <ion-buttons slot="end">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
