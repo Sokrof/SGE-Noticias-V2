@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title class="ion-text-center">
+      <ion-avatar class="header-avatar" (click)="goHome()">
+        <ion-img src="assets/newsLogo.png" alt="Logo"></ion-img>
+      </ion-avatar>
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-segment [value]="segmentValue" (ionChange)="segmentChanged($event)" color="secondary">
+      @for (section of sections; track section.name) {
+        <ion-segment-button [value]="section.name">
+          <ion-label>{{ section.name }}</ion-label>
+        </ion-segment-button>
+      }
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding">
+  <ion-list>
+    @for (noticia of filteredNoticias; track $index) {
+      <ion-card (click)="goToNoticiasDetail(noticia._id)">
+        <ion-card-content>
+          <div class="card-content">
+            <ion-img class="news-image" [src]="noticia.images" alt="Imagen de {{noticia.title}}"></ion-img>
+            <div class="card-details">
+              <ion-card-title class="ion-text-capitalize">
+                {{ noticia.title }}
+              </ion-card-title>
+              <p class="news-author">
+                <b>Autor:</b> {{ noticia.author }}
+              </p>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    }
+  </ion-list>
+</ion-content>

@@ -1,0 +1,91 @@
+<app-header titulo="detalle"></app-header>
+
+<ion-content class="ion-padding">
+  @if (noticia) {
+    <ion-card>
+      <ion-card-content>
+        <swiper-container pagination="true" navigation="true">
+          @for (img of imagenes; track img) {
+            <swiper-slide>
+              <ion-img [src]="img" />
+            </swiper-slide>
+          }
+        </swiper-container>
+
+        <h2 class="ion-margin-top">{{ noticia.title }}</h2>
+        <h3>{{ noticia.subtitle }}</h3>
+
+        <ion-chip>
+          <ion-icon [name]="getIconoSeccion(noticia)"></ion-icon>
+          <ion-label>{{ getNombreSeccion(noticia) }}</ion-label>
+        </ion-chip>
+
+        <p><b>Autor:</b> {{ noticia.author }}</p>
+        <p><b>Fecha:</b> {{ noticia.date | date:'dd/MM/yyyy' }}</p>
+
+        <ion-accordion-group>
+          <ion-accordion value="contenido">
+            <ion-item slot="header">
+              <ion-label>Contenido</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">{{ noticia.content }}</div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-content>
+        <ion-button id="open-modal-comment" expand="block" color="secondary">
+          Añadir comentario
+        </ion-button>
+        <ion-modal trigger="open-modal-comment" (willDismiss)="onWillDismiss($event)">
+          <ng-template>
+            <ion-header>
+              <ion-toolbar>
+                <ion-title>Nuevo comentario</ion-title>
+              </ion-toolbar>
+            </ion-header>
+            <ion-content class="ion-padding">
+              <ion-item>
+                <ion-input label="Nombre" labelPlacement="stacked" [(ngModel)]="nombre" placeholder="Mínimo 3 caracteres"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input label="Correo electrónico" labelPlacement="stacked" [(ngModel)]="email" placeholder="aa@aa.aa" inputmode="email"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-textarea label="Comentario" labelPlacement="stacked" [(ngModel)]="comentario" placeholder="Mínimo 2 caracteres"></ion-textarea>
+              </ion-item>
+              <ion-button expand="block" color="secondary" class="ion-margin-top" (click)="enviarComentario()">Enviar</ion-button>
+              <ion-button expand="block" fill="clear" class="ion-margin-top" (click)="cancelarComentario()">Cancelar</ion-button>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
+
+        @for (c of getComentarios(noticia); track c.email + c.comment) {
+          <ion-item>
+            <ion-label>
+              <h3>{{ c.name }}</h3>
+              <p>{{ c.email }}</p>
+              <p>{{ c.comment }}</p>
+            </ion-label>
+          </ion-item>
+        }
+      </ion-card-content>
+    </ion-card>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="secondary">
+        <ion-icon name="share-social"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="top">
+        <ion-fab-button (click)="abrirRedSocial('https://twitter.com')">
+          <ion-icon name="logo-twitter"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button (click)="abrirRedSocial('https://facebook.com')">
+          <ion-icon name="logo-facebook"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+  }
+</ion-content>

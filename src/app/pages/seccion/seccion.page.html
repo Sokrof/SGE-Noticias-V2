@@ -1,0 +1,40 @@
+<app-header titulo="seccion"></app-header>
+
+<ion-content class="ion-padding">
+  <ion-segment
+    [(ngModel)]="segmentValue"
+    (ionChange)="segmentChanged($event)"
+    color="secondary"
+    scrollable="true"
+  >
+    @for (seccion of secciones; track seccion) {
+      <ion-segment-button [value]="seccion">
+        <ion-icon [name]="getIconoSeccion(seccion)"></ion-icon>
+        <ion-label>{{ seccion }}</ion-label>
+      </ion-segment-button>
+    }
+  </ion-segment>
+
+  @for (noticia of noticias | slice:0:limiteActual; track noticia._id) {
+    <ion-card [routerLink]="['/noticia', noticia._id]">
+      <img [src]="getImagenPrincipal(noticia)" (error)="handleImageError($event)" />
+      <ion-card-content>
+        <h2>{{ noticia.title }}</h2>
+        <p>{{ noticia.author }}</p>
+      </ion-card-content>
+    </ion-card>
+  }
+
+  <ion-infinite-scroll
+    [disabled]="limiteActual >= noticias.length"
+    (ionInfinite)="cargarMas($event)"
+  >
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/buscar">
+      <ion-icon name="search"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

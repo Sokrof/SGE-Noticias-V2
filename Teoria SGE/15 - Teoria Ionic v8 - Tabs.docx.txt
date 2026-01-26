@@ -1,0 +1,179 @@
+IONIC V8
+Tabs
+
+ÍNDICE
+Introducción
+Preparación
+Componente
+Icono
+Json
+Ejemplo
+Visualización
+Explicación
+Rutas
+Explicación
+
+3
+3
+3
+4
+4
+4
+4
+5
+5
+6
+
+2
+
+INTRODUCCIÓN
+Los tabs son una navegación de nivel superior para implementar una
+navegación basada en pestañas. El componente es un contenedor de
+pestañas(Tab).
+El componente en si no tiene ningún estilo y funciona como un enrutador que
+maneja la navegación. Para poder navegar entre pestañas necesitamos una
+barra de navegación por pestañas dentro de nuestro ion-tabs que se llama
+ion-tab-bar.
+Tenemos que definir la propiedad slot de ion-tab-bar para colocarla en el
+lugar correcto del ion-tabs.
+La documentación del tabs está en la página:
+https://ionicframework.com/docs/api/tabs
+
+PREPARACIÓN
+
+COMPONENTE
+Para empezar a trabajar con el tabs vamos a necesitar una página donde
+usarlo. Creamos la página en la terminal:
+ionic g page pages/Tabs --spec=false
+
+3
+
+ICONO
+Añadimos en nuestro app.component.ts el icono que queremos usar para el menú en la
+lista de iconos(addIcons).
+addIcons({grid,
+
+logoAppleAppstore,
+
+americanFootball,
+
+beaker,
+
+star,
+
+trash, shareSocial, caretForwardCircle, close, card, pin, car,
+logoFacebook,logoTwitter,logoTiktok,logoInstagram,logoYoutube,logoGith
+ub,add,
+
+albums,
+
+ellipsisHorizontalOutline,
+
+list,
+
+heart,
+
+call,
+
+infinite, infiniteOutline, phonePortrait, cog});
+
+JSON
+Añadimos en nuestro menu.json el nuevo elemento que queremos que
+aparezca tanto en el menú como en la página de inicio.
+,{
+"nombre": "Tabs",
+"ruta": "/tabs",
+"icono": "cog"
+}
+
+EJEMPLO
+VISUALIZACIÓN
+Vamos a empezar cargando el contenido de nuestra barra de pestañas en nuestra página
+tabs.page.html:
+
+<ion-tabs>
+<ion-tab-bar slot="bottom" color="danger">
+<ion-tab-button tab="account">
+<ion-icon name="person"></ion-icon>
+<ion-label>Account</ion-label>
+
+4
+
+</ion-tab-button>
+<ion-tab-button tab="contact">
+<ion-icon name="call"></ion-icon>
+<ion-label>Contact</ion-label>
+</ion-tab-button>
+<ion-tab-button tab="settings">
+<ion-icon name="settings"></ion-icon>
+<ion-label>Settings</ion-label>
+</ion-tab-button>
+</ion-tab-bar>
+</ion-tabs>
+
+Explicación
+<ion-tab-bar slot="bottom" color="danger">
+slot: Define la colocación de la barra de pestañas.
+color: Define el color de nuestra barra.
+
+<ion-tab-button tab="account">
+
+Definición de botón dentro de la barra.
+tab: definimos el nombre de la ruta que tiene que buscar para cargarla en esta pestaña.
+
+RUTAS
+Y una vez tenemos definida la estructura, definimos las rutas que cargan las pestañas de
+nuestra barra, añadiendo las subrutas hijo a la ruta Tabs generada por automaticamente
+por Ionic con el lazy loader. En app.routes.ts:
+…
+{
+path: 'tabs',
+loadComponent: () => import('./pages/tabs/tabs.page').then( m =>
+m.TabsPage),
+children: [
+{
+path: '',
+redirectTo: 'account',
+
+5
+
+pathMatch: 'full',
+},
+{
+path: 'account',
+loadComponent: () => import('./pages/avatar/avatar.page').then(
+m => m.AvatarPage)
+},
+{
+path: 'contact',
+loadComponent: () => import('./pages/list/list.page').then( m
+=> m.ListPage)
+},
+{
+path: 'settings',
+loadComponent: () => import('./pages/cards/cards.page').then( m
+=> m.CardsPage)
+}
+]
+},
+
+Explicación
+children: [
+
+Array de subrutas internas de la página tabs. Estas rutas son hijas de /tabs/. En nuestro
+caso vamos a tener las rutas:
+-
+
+/tabs/account
+
+-
+
+/tabs/contact
+
+-
+
+/tabs/settings
+
+6
+
+

@@ -1,0 +1,199 @@
+IONIC V8
+Menú
+
+ÍNDICE
+Introducción
+Componente
+Carga de datos. La lógica
+Visualización
+Explicación
+Añadimos el menú a la aplicación
+Botón de menú
+Botón personalizado
+
+3
+3
+3
+5
+5
+6
+6
+7
+
+2
+
+INTRODUCCIÓN
+Vamos a añadir un menú a nuestra App que aparecerá desde la izquierda.
+La página de Ionic que nos muestra el menú es:
+https://ionicframework.com/docs/api/menu
+
+COMPONENTE
+Para utilizar el menú vamos a generar un componente llamado menu en
+nuestra carpeta components. En la terminal:
+ionic generate component components/menu --spec=false --standalone
+
+CARGA DE DATOS. LA LÓGICA
+El siguiente paso es cargar los datos que mostrará el menú. Esta información
+ya la tenemos en nuestra página principal, así que vamos a reutilizar esta
+información. En menu.component.ts:
+import {Component, inject, OnInit} from '@angular/core';
+import {
+IonContent, IonHeader, IonIcon, IonItem, IonLabel,
+IonList, IonMenu, IonMenuToggle, IonTitle, IonToolbar
+} from "@ionic/angular/standalone";
+import {RouterLink} from "@angular/router";
+import {DataService} from "../../services/data.service";
+import {Componente} from "../../common/interfaces";
+@Component({
+selector: 'app-menu',
+templateUrl: './menu.component.html',
+styleUrls: ['./menu.component.scss'],
+standalone: true,
+
+3
+
+imports: [IonList, IonMenu, IonMenuToggle, IonHeader,
+IonTitle,
+
+IonToolbar,
+
+IonContent,
+
+IonIcon,
+
+IonLabel,
+
+IonItem, RouterLink]
+})
+export class MenuComponent
+
+implements OnInit {
+
+private dataService: DataService = inject(DataService);
+componentes: Componente[] = [];
+constructor() {
+}
+ngOnInit() {
+this.cargarComponentes();
+}
+private cargarComponentes() {
+this.dataService.getComponentesMenu().subscribe(
+{
+next:
+
+(data: Componente[]) => {
+
+this.componentes = data;
+},
+error:
+
+(err: Error) => console.error(err),
+
+complete:
+
+() => {
+
+console.log('Data loaded.')}
+}
+);
+}
+}
+
+4
+
+VISUALIZACIÓN
+Y definimos el código visible del menú en menu.component.html:
+<ion-menu
+
+side="end"
+
+menuId="primerMenu"
+
+contentId="principal">
+<ion-header>
+<ion-toolbar color="primary">
+<ion-title>Menú Principal</ion-title>
+</ion-toolbar>
+</ion-header>
+<ion-content>
+<ion-list>
+@for (c of componentes; track c){
+<ion-menu-toggle>
+<ion-item [routerLink]="c.ruta" detail="true">
+<ion-icon slot="start" [name]="c.icono"></ion-icon>
+<ion-label>
+{{ c.nombre }}
+</ion-label>
+</ion-item>
+</ion-menu-toggle>
+}
+</ion-list>
+</ion-content>
+</ion-menu>
+
+Explicación
+side="start" : El lado por donde aparecerá el menú.
+
+menuId="primerMenu" : El id del menú. Podemos tener diferentes menús
+
+con diferentes ids.
+contentId="principal"" : Apunta al id del ion router outlet donde
+
+queremos insertar el menú.
+
+5
+
+AÑADIMOS EL MENÚ A LA APLICACIÓN
+Vamos a la página app.component.html donde prácticamente renderizamos
+todo lo de Ionic. En la parte superior vamos a añadir nuestro menú porque
+nuestro menú estará en todas las páginas. Además añadiremos el id al
+router para que se conecte con nuestro menú:
+<ion-app>
+<app-menu></app-menu>
+<ion-router-outlet id="principal"></ion-router-outlet>
+</ion-app>
+
+BOTÓN DE MENÚ
+Ahora vamos a añadir un botón para abrir el menú en la cabecera de nuestra
+página de inicio. En inicio.page.html:
+<ion-header class="ion-no-border">
+<ion-toolbar>
+<ion-buttons slot="start">
+<ion-menu-button menu="primerMenu" color="primary">
+</ion-menu-button>
+</ion-buttons>
+<ion-title class="ion-text-center">Mi App</ion-title>
+</ion-toolbar>
+</ion-header>
+
+6
+
+BOTÓN PERSONALIZADO
+Y en nuestra cabecera común un botón para abrir el menú con un icono
+personalizado. En header.component.html:
+<ion-header class="ion-no-border" >
+<ion-toolbar>
+<ion-buttons slot="start">
+<ion-back-button defaultHref="/"></ion-back-button>
+</ion-buttons>
+<ion-title
+
+class="ion-text-center
+
+ion-text-capitalize"> {{titulo()}}</ion-title>
+<ion-buttons slot="end">
+<ion-menu-toggle>
+<ion-button>
+<ion-avatar>
+<ion-img
+src="/assets/images/menu.png"></ion-img>
+</ion-avatar>
+</ion-button>
+</ion-menu-toggle>
+</ion-buttons>
+</ion-toolbar>
+</ion-header>
+
+7
+
+

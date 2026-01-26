@@ -1,0 +1,106 @@
+IONIC V8
+Cabecera
+
+ÍNDICE
+Cabecera común........................................................................................................3
+
+2
+
+CABECERA COMÚN
+Vamos a crear una cabecera común para factorizar, ya que la vamos a
+utilizar en bastantes componentes.
+Creamos un componente dentro la carpeta componentes que será el header.
+En la terminal:
+ionic g component components/header --spec=false --standalone
+
+Y
+
+ya
+
+podemos
+
+empezar
+
+a
+
+trabajar
+
+en
+
+nuestra
+
+cabecera
+
+header.component.html:
+<ion-header class="ion-no-border" >
+<ion-toolbar>
+<ion-buttons slot="start">
+<ion-back-button defaultHref="/"></ion-back-button>
+</ion-buttons>
+<ion-title
+
+class="ion-text-center
+
+ion-text-capitalize">
+
+Título</ion-title>
+</ion-toolbar>
+</ion-header>
+Y en alert.page.html y action-sheet.page.html añadimos nuestra cabecera
+en lugar de la que tenemos, es decir sustituímos todo el ion-header por
+app-header:
+<ion-header>
+<ion-toolbar>
+<ion-title>action-sheet</ion-title>
+</ion-toolbar>
+</ion-header>
+
+3
+
+Por
+<app-header></app-header>
+Y nos aseguramos de importar el HeaderComponent en cada página,
+alert.module.ts y action-sheet.module.ts:
+@Component({
+selector: 'app-action-sheet',
+templateUrl: './action-sheet.page.html',
+styleUrls: ['./action-sheet.page.scss'],
+standalone: true,
+imports:
+
+[IonContent,
+
+CommonModule,
+
+FormsModule,
+
+HeaderComponent]
+})
+export class AlertPage implements OnInit {
+constructor() { }
+ngOnInit() { }
+}
+Para terminar solo nos falta hacerlo dinámico y para eso hay que realizar un
+Input que recoja el nombre de cada cabecera como atributo. En
+header.component.ts, en la parte de declaración de variables:
+export class HeaderComponent implements OnInit {
+titulo: ModelSignal<string> = model.required();
+constructor() { }
+ngOnInit() {}
+}
+Y en header.component.html le pasamos el título:
+
+<ion-title class="ion-text-capitalize ion-text-center">
+{{titulo}}
+</ion-title>
+
+4
+
+En alert.page.html (y todas las sucesivas páginas que usen el header)
+añadimos el titulo como un atributo donde le pasaremos como valor el título
+que queramos darle:
+<app-header titulo="alert"></app-header>
+
+5
+
+

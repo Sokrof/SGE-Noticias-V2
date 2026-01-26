@@ -1,0 +1,101 @@
+ion-card {
+  border-radius: 8px;
+  background-color: var(--ion-card-background);
+  color: var(--ion-text-color);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+ion-card:hover {
+  transform: scale(1.02);
+}
+
+ion-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+ion-thumbnail {
+  width: 100%;
+  height: 140px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+ion-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+ion-chip {
+  background-color: var(--ion-color-secondary);
+  color: var(--ion-color-secondary-contrast);
+  font-size: 12px;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.release-date {
+  font-size: 14px;
+  color: var(--ion-color-medium);
+  margin-top: 5px;
+  text-align: left;
+}
+
+ion-fab-button {
+  --background: var(--ion-color-primary);
+  --color: var(--ion-color-primary-contrast);
+}
+
+ion-icon {
+  font-size: 24px;
+  color: #ffffff;
+}
+
+/* Colores dinámicos para el badge */
+.badge-danger {
+  background-color: var(--ion-color-danger) !important;
+  color: var(--ion-color-danger-contrast) !important;
+}
+
+.badge-warning {
+  background-color: var(--ion-color-warning) !important;
+  color: var(--ion-color-warning-contrast) !important;
+}
+
+.badge-success {
+  background-color: var(--ion-color-success) !important;
+  color: var(--ion-color-success-contrast) !important;
+}
+
+
+

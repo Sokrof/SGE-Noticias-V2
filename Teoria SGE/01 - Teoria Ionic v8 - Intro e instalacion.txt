@@ -1,0 +1,102 @@
+IONIC V8
+Introducción e instalación
+
+ÍNDICE
+Introducción...............................................................................................................3
+Ventajas...................................................................................................................... 3
+1. Velocidad..................................................................................................... 3
+2. Mejor soporte...............................................................................................3
+3. Un único canal............................................................................................. 3
+Framework OpenSource....................................................................................... 4
+Ionic con Angular................................................................................................... 4
+Instalación..................................................................................................................5
+Node.js:................................................................................................................. 5
+Typescript.............................................................................................................. 5
+Angular.Cli............................................................................................................. 6
+Ionic.Cli..................................................................................................................6
+
+2
+
+INTRODUCCIÓN
+Ionic es una aplicación híbrida. Las aplicaciones híbridas son esencialmente
+aplicaciones nativas que se pueden descargar e instalar a través de las
+respectivas AppStores.
+Una aplicación Ionic, en su mayoría, es indistinguible de una aplicación
+nativa y los usuarios no serán capaces de distinguir la diferencia. Pueden
+acceder a los mismos recursos hardware y tienen un rendimiento acelerado
+por hardware como si fueran creadas con el SDK nativo, pero en el fondo
+está usando código de html, css y js.
+
+VENTAJAS
+1. Velocidad
+
+Codificar en una única base de código hace que puedas entregar
+aplicaciones a múltiples plataformas entre 2 y 3 veces más rápido que en
+nativo.
+2. Mejor soporte
+
+Una aplicación híbrida es más fácil de dar soporte además que no necesitas
+programadores especializados en código nativo.
+3. Un único canal
+
+Las aplicaciones híbridas funcionan donde sea que la web funcione, ya sea
+en un dispositivo móvil, en un ordenador, en la TV o incluso en el coche.
+
+3
+
+FRAMEWORK OPENSOURCE
+Ionic es de código abierto y está en constante evolución. Tiene un conjunto
+de herramientas que facilitan el desarrollo y las pruebas. Además permite
+desarrollar para varias plataformas con el mismo código y es capaz de
+adaptar su diseño según la plataforma donde esté funcionando.
+
+IONIC CON ANGULAR.
+En nuestro caso aprenderemos Ionic utilizando Angular. Angular es quién
+realiza la lógica de validación entre pantallas y manipulación del HTML.
+Usaremos el sistema de rutas de angular para navegar entre pantallas. Ionic
+es quién nos va a dar a nosotros los controles y la forma de crear nuestras
+aplicaciones mediante el código de Angular y desplegarlas en los
+dispositivos móviles.
+
+4
+
+INSTALACIÓN
+NODE.JS:
+- https://nodejs.org/es/
+- Instalar siempre la versión LTS que es la que tiene soporte. Es un
+ejecutable que solo hay que ir siguiendo la instalación. En el caso de
+Windows instalar también el chocolatey que nos instalará lo necesario para
+que funcione Node.
+- Comprobar en terminal / cmd con:
+node -v
+
+TYPESCRIPT
+- https://www.typescriptlang.org/ → Download
+- Copiamos el comando a ejecutar:
+
+- En Windows abrir cmd como administrador y ejecutar el comando
+npm install -g typescript
+- En iOS como tiene el -g:
+sudo npm install -g typescript
+
+5
+
+ANGULAR.CLI
+- https://angular.io/cli
+- Copiamos el comando a ejecutar
+- En Windows abrir cmd como administrador y ejecutar el comando:
+npm install -g @angular/cli
+- En iOS como tiene el -g:
+sudo npm install -g @angular/cli –unsafe-perms
+
+IONIC.CLI
+- https://ionicframework.com/docs/intro/cli
+- Copiamos el comando a ejecutar
+- En Windows abrir cmd como administrador y ejecutar el comando
+npm install -g @ionic/cli capacitor
+- En iOS como tiene el -g
+sudo npm install -g @ionic/cli capacitor –unsafe-perms
+
+6
+
+

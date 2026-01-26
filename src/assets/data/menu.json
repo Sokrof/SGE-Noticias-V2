@@ -1,0 +1,32 @@
+[
+  {
+    "nombre": "Inicio",
+    "ruta": "/inicio",
+    "icono": "home"
+  },
+  {
+    "nombre": "Deportes",
+    "ruta": "/seccion/Deportes",
+    "icono": "american-football"
+  },
+  {
+    "nombre": "Economía",
+    "ruta": "/seccion/Economia",
+    "icono": "card"
+  },
+  {
+    "nombre": "Mundo",
+    "ruta": "/seccion/Mundo",
+    "icono": "pin"
+  },
+  {
+    "nombre": "Tecnología",
+    "ruta": "/seccion/Tecnologia",
+    "icono": "beaker"
+  },
+  {
+    "nombre": "Buscar",
+    "ruta": "/buscar",
+    "icono": "search"
+  }
+]

@@ -1,0 +1,313 @@
+IONIC V8
+Grid y Buttons
+
+ÍNDICE
+Introducción
+Grid
+Botones
+Preparación
+Componente
+Icono
+Json
+Ejemplos
+
+3
+3
+3
+3
+3
+4
+4
+4
+
+2
+
+Introducción
+GRID
+El grid es un sistema flexible orientado a móviles muy potente con plantillas
+personalizadas. Está compuesto por 3 partes: grid, rows y columns. Las
+columnas se expanderán para rellenar la fila, y se recalculará su tamaño al
+añadir nuevas columnas. Está basado en un sistema de 12 columnas como
+Bootstrap, basadas en el tamaño del dispositivo.
+La documentación del grid está en la página:
+https://ionicframework.com/docs/api/grid
+
+BOTONES
+Los botones nos ofrecen un elemento clicable, que puede ser usado en
+formularios o en cualquier lugar que nos demande una funcionalidad de
+botón estandar. Pueden mostrar texto, iconos o ambos. Pueden ser
+estilizados con diferentes atributos para verse de una determinada manera.
+La documentación de button está en la página:
+https://ionicframework.com/docs/api/button
+
+PREPARACIÓN
+Componente
+
+Para empezar a trabajar con el grid y los botones vamos a necesitar una
+página donde usarlos. Creamos la página en la terminal:
+ionic generate page pages/gridButtons –spec=false
+
+3
+
+Icono
+
+Añadimos en nuestro app.component.ts el icono que queremos usar para el
+menú en la lista de iconos(addIcons).
+addIcons({grid, logoAppleAppstore, americanFootball, beaker,
+star});
+
+Json
+
+Añadimos en nuestro menu.json el nuevo elemento que queremos que
+aparezca tanto en el menú como en la página de inicio.
+,
+{
+"nombre": "Grid y Buttons",
+"ruta": "/grid-buttons",
+"icono": "grid"
+}
+
+EJEMPLOS
+Vamos a ver diversos ejemplos de cómo trabajar con el grid y sus elementos
+en grid-buttons.page.html:
+
+<ion-header>
+<ion-toolbar>
+<ion-buttons slot="start">
+<ion-back-button defaultHref="/"></ion-back-button>
+</ion-buttons>
+<ion-title class="ion-text-center">
+Grid y Buttons
+</ion-title>
+<ion-buttons slot="end">
+<ion-button color="danger">
+
+4
+
+<ion-icon name="heart"></ion-icon>
+</ion-button>
+<ion-button color="warning">
+<ion-icon name="star"></ion-icon>
+</ion-button>
+</ion-buttons>
+</ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+<h2>Expand y Size</h2>
+<h4><b>Expand</b>: Full o Block</h4>
+<h4><b>Size</b>: Small, Medium o Large</h4>
+<ion-grid>
+<ion-row>
+<ion-col>
+<ion-button
+
+expand="full"
+
+size="small">Full
+
+S</ion-button>
+</ion-col>
+<ion-col>
+<ion-button expand="full" size="medium">Full
+M</ion-button>
+</ion-col>
+<ion-col>
+<ion-button
+
+expand="full"
+
+size="large">Full
+
+L</ion-button>
+</ion-col>
+</ion-row>
+<ion-row>
+<ion-col>
+<ion-button expand="block" size="small">Block
+S</ion-button>
+</ion-col>
+<ion-col>
+
+5
+
+<ion-button expand="block" size="medium">Block
+M</ion-button>
+</ion-col>
+<ion-col>
+<ion-button expand="block" size="large">Block
+L</ion-button>
+</ion-col>
+</ion-row>
+
+<h2>Fill</h2>
+<h4><b>Fill</b>: Clear, Solid o Outline</h4>
+<ion-row class="ion-margin-top">
+<ion-col>
+<ion-button routerLink="/alert" color="primary"
+fill="clear">
+Alert
+</ion-button>
+</ion-col>
+<ion-col>
+<ion-button
+
+routerLink="/action-sheet"
+
+color="secondary" fill="solid">
+A-Sheet
+</ion-button>
+</ion-col>
+<ion-col>
+<ion-button
+
+routerLink="/"
+
+color="tertiary"
+
+fill="outline">
+Inicio
+</ion-button>
+</ion-col>
+</ion-row>
+
+6
+
+<h2>Shape</h2>
+<h4><b>Shape</b>: Default, o Round</h4>
+<ion-row class="ion-margin-top">
+<ion-col>
+<ion-button color="primary" shape="default">
+Default
+</ion-button>
+</ion-col>
+<ion-col>
+<ion-button color="primary" shape="round">
+Default
+</ion-button>
+</ion-col>
+<ion-button>
+<ion-icon
+
+slot="icon-only"
+
+name="heart"></ion-icon>
+</ion-button>
+<ion-button shape="round">
+<ion-icon
+
+slot="icon-only"
+
+name="heart"></ion-icon>
+</ion-button>
+</ion-row>
+</ion-grid>
+<h2>Grid</h2>
+<ion-grid fixed="true">
+<ion-row>
+@for(column of [1,2,3,4,5,6];track column; let i =
+$index){
+<ion-col>
+Item {{i+1}}
+</ion-col>
+
+7
+
+}
+</ion-row>
+</ion-grid>
+<h2>Grid responsive</h2>
+<ion-grid fixed="true">
+<ion-row>
+@for
+
+(c of [1,2,3,4,5,6,7,8,9,10,11,12]; track
+
+$index){
+<ion-col size="12" size-lg="3" size-md="4"
+size-sm="6" size-xs="12">
+<ion-card>
+<ion-img src="/assets/shapes.svg"></ion-img>
+<ion-card-header>
+<ion-card-subtitle>
+Card Subtitle
+</ion-card-subtitle>
+<ion-card-title>Card Title</ion-card-title>
+</ion-card-header>
+<ion-card-content>
+Lorem ipsum dolor sit amet, consectetur
+adipisicing elit. Ab, animi aperiam asperiores, deleniti
+eligendi hic
+
+impedit maxime modi nam nemo, odio
+
+perspiciatis quaerat reprehenderit rerum sapiente tempora
+vel. Explicabo, recusandae!
+</ion-card-content>
+</ion-card>
+</ion-col>
+}
+</ion-row>
+</ion-grid>
+</ion-content>
+
+8
+
+Y
+
+faltaría
+
+por
+
+añadir
+
+los
+
+iconos
+
+e
+
+imports
+
+necesarios
+
+en
+
+el
+
+grid-buttons.page.ts:
+@Component({
+selector: 'app-grid-buttons',
+templateUrl: './grid-buttons.page.html',
+styleUrls: ['./grid-buttons.page.scss'],
+standalone: true,
+imports: [IonContent, IonHeader, IonTitle, IonToolbar,
+CommonModule,
+IonRow,
+
+FormsModule,
+
+IonCol,
+
+IonButton,
+
+HeaderComponent,
+RouterLink,
+
+IonGrid,
+
+IonButtons,
+
+IonBackButton, IonIcon, IonCard, IonImg, IonCardHeader,
+IonCardSubtitle, IonCardTitle, IonCardContent]
+})
+export class GridButtonsPage implements OnInit {
+constructor() {
+addIcons({heart})
+}
+ngOnInit() {
+}
+}
+
+9
+
+

@@ -1,0 +1,178 @@
+IONIC V8
+Action Sheet
+
+ÍNDICE
+Introducción
+Ejemplos
+Visualización
+Lógica
+Explicación
+
+3
+3
+3
+4
+6
+
+2
+
+INTRODUCCIÓN
+Un action sheet es un cuadro de diálogo que nos muestra una serie de
+opciones. Aparece en la parte superior de la App y tiene que ser cerrado
+manualmente por el usuario antes de que pueda continuar usando la App.
+Hay varias opciones para cerrar el action sheet, incluyendo hacer click fuera
+del action sheet, o un botón de cancelar.
+La documentación del action sheet está en la página:
+https://ionicframework.com/docs/api/action-sheet
+
+EJEMPLOS
+VISUALIZACIÓN
+En primer lugar vamos a crear un botón que sea el que abra el action sheet.
+Para ello en nuestro action-sheet.page.html:
+<app-header titulo="Action Sheet"></app-header>
+<ion-content class="ion-padding">
+<ion-button expand="full"
+color="primary"
+id="mostrar-action-sheet">
+Abrir Action Sheet
+</ion-button>
+<ion-action-sheet
+trigger="mostrar-action-sheet"
+header="Actions"
+[buttons]="actionSheetButtons"></ion-action-sheet>
+</ion-content>
+
+3
+
+LÓGICA
+Y en nuestro componente vamos a crear el array de botones. En nuestro
+action-sheet.page.ts:
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import
+
+{IonActionSheet,
+
+IonButton,
+
+IonContent}
+
+from
+
+'@ionic/angular/standalone';
+import
+
+{HeaderComponent}
+
+from
+
+"../../components/header/header.component";
+@Component({
+selector: 'app-action-sheet',
+templateUrl: './action-sheet.page.html',
+styleUrls: ['./action-sheet.page.scss'],
+standalone: true,
+imports:
+
+[IonContent,
+
+CommonModule,
+
+FormsModule,
+
+HeaderComponent, IonButton, IonActionSheet]
+})
+export class ActionSheetPage implements OnInit {
+actionSheetButtons = [{
+text: 'Delete',
+role: 'destructive',
+icon: 'trash',
+cssClass: 'rojo',
+handler: () => {
+console.log('Delete clicked');
+}
+}, {
+text: 'Share',
+icon: 'share-social',
+
+4
+
+handler: () => {
+console.log('Share clicked');
+}
+}, {
+text: 'Play (open modal)',
+icon: 'caret-forward-circle',
+handler: () => {
+console.log('Play clicked');
+}
+}, {
+text: 'Favorite',
+icon: 'heart',
+handler: () => {
+console.log('Favorite clicked');
+}
+}, {
+text: 'Cancel',
+icon: 'close',
+role: 'cancel',
+handler: () => {
+console.log('Cancel clicked');
+}
+}]
+;
+constructor() { }
+ngOnInit() {
+}
+}
+
+5
+
+Explicación
+
+header: será la cabecera de nuestro action-sheet.
+backdropDismiss: nos dice si al pinchar fuera de la pantalla es igual que
+cancelar. True cancelaría, false no.
+buttons: [{
+Array de botones del action sheet:
+-
+
+text: texto del botón
+
+-
+
+role: tendrá una visualización especial en iOS.
+
+-
+
+icon: El icono asociado. https://ionicons.com/
+
+-
+
+cssClass: una clase creada por nosotros para darle la misma
+funcionalidad en material design(Android) que el role destructive de
+iOS.
+
+-
+
+handler: el manejador que dispara la función cuando se hace click
+en ese botón.
+
+Solo nos quedan dos pasos. El primero añadir los iconos de las opciones a
+nuestro app.component.ts:
+addIcons({grid, logoAppleAppstore, americanFootball, beaker,
+star, trash, shareSocial, caretForwardCircle, close});
+
+Para que funcione nuestra clase de CSS, hay que definirla en nuestro
+archivo global.scss:
+.rojo{
+color: red;
+}
+.rojo .sc-ion-action-sheet-md {
+color: red;
+}
+
+6
+
+

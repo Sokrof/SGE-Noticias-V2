@@ -1,0 +1,135 @@
+IONIC V8
+Avatar
+
+ÍNDICE
+Introducción
+Preparación
+Componente
+Icono
+Json
+Ejemplos
+Visualización
+
+3
+3
+3
+3
+4
+4
+4
+
+2
+
+INTRODUCCIÓN
+El avatar es un componente circular que normalmente envuelve a una
+imagen o icono. Pueden ser usadas para representar a una persona u
+objeto.
+El avatar puede ser usado individualmente o dentro de otro elemento. Si está
+dentro de un ion-chip o un ion-item, el avatar se redimensionará para
+ajustarse al componente padre. Para posicionar un avatar al principio o al
+final de un item, se puede usar el atributo slot con valor start o end,
+respectivamente.
+La documentación del avatar está en la página:
+https://ionicframework.com/docs/api/avatar
+
+PREPARACIÓN
+COMPONENTE
+Para empezar a trabajar con el avatar vamos a necesitar una página donde
+usarlo. Creamos la página en la terminal:
+ionic generate page pages/avatar –spec=false
+
+ICONO
+Añadimos en nuestro app.component.ts el icono que queremos usar para el
+menú en la lista de iconos(addIcons).
+addIcons({grid, logoAppleAppstore, americanFootball, beaker,
+star});
+
+3
+
+JSON
+Añadimos en nuestro menu.json el nuevo elemento que queremos que
+aparezca tanto en el menú como en la página de inicio.
+,
+{
+"nombre": "Avatar",
+"ruta": "/avatar",
+"icono": "beaker"
+}
+
+EJEMPLOS
+VISUALIZACIÓN
+Empezaremos añadiendo una imagen a la cabecera, por ello en este
+componente no vamos a usar nuestra cabecera personalizada.
+A continuación copiamos la imagen que queremos utilizar en la carpeta
+assets de nuestro proyecto, donde estarán todas las imágenes y archivos
+multimedia.
+Y vamos a trabajar en nuestra página de avatar para añadir diversos avatars
+de diferentes maneras. En avatar.page.html:
+<ion-header class="ion-no-border">
+<ion-toolbar>
+<ion-buttons slot="start">
+<ion-back-button defaultHref="/"></ion-back-button>
+</ion-buttons>
+<ion-title class="ion-text-center">Avatar</ion-title>
+<ion-buttons slot="end">
+<ion-avatar>
+
+4
+
+<ion-img src="/assets/images/chibi.jpg"></ion-img>
+</ion-avatar>
+</ion-buttons>
+</ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+<h2>Chips</h2>
+@for (i of [1,2,3,4,5,6,7,8]; track i){
+<ion-chip color="primary">
+<ion-avatar>
+<ion-img src="/assets/images/chibi.jpg"></ion-img>
+</ion-avatar>
+<ion-label>Chibi</ion-label>
+</ion-chip>
+}
+<ion-list>
+<ion-list-header><h2>Avatar</h2></ion-list-header>
+@for (i of [1,1,1,1];track $index){
+<ion-item>
+<ion-avatar slot="start">
+<ion-img
+src="/assets/images/chibi.jpg"></ion-img>
+</ion-avatar>
+<ion-label>Chibi Start</ion-label>
+</ion-item>
+}
+@for (i of [1,1,1,1];track $index){
+<ion-item >
+<ion-avatar slot="end">
+
+5
+
+<ion-img
+src="/assets/images/chibi.jpg"></ion-img>
+</ion-avatar>
+<ion-label>Chibi End</ion-label>
+</ion-item>
+}
+<ion-list-header><h2>Thumbnails</h2></ion-list-header>
+@for (i of [1,1,1,1];
+
+track $index){
+
+<ion-item >
+<ion-thumbnail slot="start">
+<ion-img
+src="/assets/images/chibi.jpg"></ion-img>
+</ion-thumbnail>
+<ion-label>Chibi End</ion-label>
+</ion-item>
+}
+</ion-list>
+</ion-content>
+
+6
+
+

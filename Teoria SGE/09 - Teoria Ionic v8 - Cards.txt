@@ -1,0 +1,200 @@
+IONIC V8
+Subtítulo
+
+ÍNDICE
+Introducción
+Preparación
+Componente
+Icono
+Json
+Visualización
+Explicación
+
+3
+3
+3
+3
+4
+4
+6
+
+2
+
+INTRODUCCIÓN
+Las tarjetas son una pieza estándar de la interfaz que sirven como punto de
+entrada más detallado de la información. Una tarjeta puede ser un simple
+componente, pero normalmente tienen cabecera, título, subtítulo y contenido,
+tenemos a ion-card subdividida en varios subcomponentes para reflejar esto:
+ion-card-header, ion-card-title, ion-card-subtitle y ion-card-content.
+La documentación de las cards está en la página:
+https://ionicframework.com/docs/api/card
+
+PREPARACIÓN
+COMPONENTE
+Para empezar a trabajar con las cards vamos a necesitar una página donde
+usarlas. Creamos la página en la terminal:
+ionic generate page pages/card –spec=false
+
+ICONO
+Añadimos en nuestro app.component.ts el icono que queremos usar para el
+menú en la lista de iconos(addIcons).
+addIcons({grid, logoAppleAppstore, americanFootball, beaker,
+star, trash, shareSocial, caretForwardCircle, close, card});
+
+3
+
+JSON
+Añadimos en nuestro menu.json el nuevo elemento que queremos que
+aparezca tanto en el menú como en la página de inicio.
+,
+{
+"nombre": "Cards",
+"ruta": "/card",
+"icono": "card"
+}
+
+VISUALIZACIÓN
+Para trabajar con las cards solo vamos a utilizar el html. Vamos a ver 4
+ejemplos de tarjetas, pero se pueden crear tantos diferentes como queramos
+colocando la diferente información en el orden deseado.
+
+En cards.page.html:
+<app-header titulo="Cards"></app-header>
+<ion-content class="ion-padding">
+<h2>Card normal</h2>
+<ion-card mode="ios" color="primary">
+<ion-card-header>
+<ion-card-title>Card Title</ion-card-title>
+<ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+</ion-card-header>
+<ion-card-content>
+Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+Aperiam culpa eligendi, esse expedita ipsum iste
+laudantium necessitatibus nisi possimus quam quia repellendus
+reprehenderit soluta vitae voluptas. Facilis
+
+4
+
+perferendis quibusdam voluptates!
+</ion-card-content>
+</ion-card>
+<h2>Card con marcador</h2>
+<ion-card>
+<ion-item color="primary">
+<ion-icon color="light" slot="start" name="pin"></ion-icon>
+<ion-label>Marcador</ion-label>
+</ion-item>
+<ion-card-content>
+Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+Aliquid architecto consequuntur deleniti dolorem eligendi nesciunt
+nostrum, officia quae repudiandae soluta! Dolorem eos iste
+magni nihil numquam odio provident rerum tempora?
+</ion-card-content>
+</ion-card>
+<h2>Card con imagen</h2>
+<ion-card>
+<ion-card-header color="danger">
+<ion-card-title>Título</ion-card-title>
+</ion-card-header>
+<ion-img src="/assets/shapes.svg"></ion-img>
+<ion-card-content>Lorem
+
+ipsum
+
+dolor
+
+sit
+
+amet,
+
+consectetur
+
+adipisicing elit. Consequuntur dolorum hic laudantium nulla
+voluptatibus!
+
+Architecto
+
+consectetur
+
+eum
+
+ex
+
+ipsum
+
+iure,
+
+laboriosam nobis possimus quam, quia quidem ratione, sed tempora
+tempore!
+</ion-card-content>
+</ion-card>
+<h2>Card personalizada</h2>
+<ion-card class="bg-card">
+<ion-card-header>
+<ion-card-title class="bg-card-title">Título</ion-card-title>
+<ion-card-subtitle
+class="bg-card-subtitle">Título</ion-card-subtitle>
+</ion-card-header>
+
+5
+
+<ion-card-content>Lorem
+
+ipsum
+
+dolor
+
+sit
+
+amet,
+
+consectetur
+
+adipisicing elit. Consequuntur dolorum hic laudantium nulla
+voluptatibus!
+
+Architecto
+
+consectetur
+
+eum
+
+ex
+
+ipsum
+
+iure,
+
+laboriosam nobis possimus quam, quia quidem ratione, sed tempora
+tempore!
+</ion-card-content>
+</ion-card>
+</ion-content>
+
+Y los estilos correspondientes a la última card en cards.page.scss:
+.bg-card {
+--background: #000;
+--color: #9efff0;
+}
+.bg-card-title {
+--color: #52ffe4;
+}
+.bg-card-subtitle {
+--color: #d1fff8;
+}
+
+Explicación
+
+<ion-card mode="ios" color="primary">
+El mode puede ser md para Android y ios para Mac. Forzará a la tarjeta a
+usar el estilo visual de una u otra plataforma.
+El color es para asignarle un color a la tarjeta.
+<ion-card-header color="danger">
+Es la parte de la cabecera de la tarjeta donde irá el título y subtítulo. Ambos
+son optativos. Podemos asignarle un color de fondo con la etiqueta color.
+<ion-card-content>
+Lugar donde irá el contenido de nuestra carta.
+
+6
+
+

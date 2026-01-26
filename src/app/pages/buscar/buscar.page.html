@@ -1,0 +1,34 @@
+<app-header titulo="buscar"></app-header>
+
+<ion-content class="ion-padding">
+  <ion-segment
+    [(ngModel)]="criterio"
+    color="secondary"
+  >
+    <ion-segment-button value="title">
+      <ion-label>Título</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="author">
+      <ion-label>Autor</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-searchbar animated="true" [(ngModel)]="textoBuscar" placeholder="Buscar..."></ion-searchbar>
+
+  @for (noticia of todasNoticias | filtro:textoBuscar:criterio | slice:0:limiteActual; track noticia._id) {
+    <ion-card [routerLink]="['/noticia', noticia._id]">
+      <img [src]="getImagenPrincipal(noticia)" (error)="handleImageError($event)" />
+      <ion-card-content>
+        <h2>{{ noticia.title }}</h2>
+        <p>{{ noticia.author }}</p>
+      </ion-card-content>
+    </ion-card>
+  }
+
+  <ion-infinite-scroll
+    [disabled]="limiteActual >= (todasNoticias | filtro:textoBuscar:criterio).length"
+    (ionInfinite)="cargarMas($event)"
+  >
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

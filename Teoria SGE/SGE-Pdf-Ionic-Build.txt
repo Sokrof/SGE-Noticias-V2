@@ -1,0 +1,201 @@
+CREAR APK
+Paso a paso para Android
+ÍNDICE
+ENCABEZADO 1............................................................... ¡Error! Marcador no definido.
+  Encabezado 2 ............................................................................¡Error! Marcador no definido.
+
+
+
+
+                                                                                                           2
+INTRODUCCIÓN
+Hemos creado por fin nuestra App y queremos subirla a las tiendas oficiales. Para ello
+vamos a ver los pasos que hay que seguir para poder hacerlo con Capacitor de manera
+rápida y sencilla.
+
+
+
+
+PRERREQUISITOS
+Capacitor
+Es una herramienta nativa que permite a las aplicaciones web modernas tener acceso a
+elementos nativos como la cámara, sistema de ficheros, notificaciones, red, GPS
+utilizando JavaScript. Si con Ionic hemos creado una interfaz gráfica, con Capacitor
+hacemos posible compilarla y hacerla funcionar en un dispositivo móvil.
+
+
+
+
+Instalar herramientas nativas
+Para poder publicar nuestra App vamos a tener que utilizar las herramientas nativas que
+usan los desarrolladores. Esto significa tener instalado Android Studio y Xcode, así como
+tener cuenta de desarrollador de Google (25 euros y es para toda la vida) o de iOS (80
+euros al año)
+
+
+
+
+MANOS A LA OBRA
+Configuración de Capacitor
+En el fichero capacitor.config.ts definiremos la configuración general de nuestro
+proyecto. Lo primero es reemplazar el appId por defecto por un identificador que
+represente correctamente el nombre de la App. Este es un identificador único que más
+tarde usaremos para Android, así que hay que cambiarlo por algo específico que
+represente a nuestra App.
+
+
+
+
+                                                                               3
+Añadir las plataformas nativas con Capacitor
+Para construir nuestra App de Ionic con Capacitor, tenemos que crear un proyecto nativo
+para Android. Antes tendremos que lanzar el comando build, porque Capacitor
+sincronizará la compilación web con la carpeta del proyecto nativo de Android. Más tarde
+actualizaremos el código y volveremos a sincronizar, por ahora comenzamos ejecutando
+en la terminal del proyecto los siguientes comandos:
+
+ionic build
+
+ionic cap add android
+
+
+
+En este punto podemos abrir el Proyecto native con Android Studio con el comando
+
+ionic cap open android
+
+
+
+
+Generar el icono de la App y la imagen de carga (Splashscreen)
+Cada App necesita un icono atractivo y adecuado, además de una buena pantalla de carga,
+ya que será el primer contacto de los usuarios con la App. Para esta tarea podemos usar
+un plugin de Capacitor y para ello necesitamos crear un icono y la imagen en una carpeta
+llamada assets que crearemos dentro de la carpeta raíz del proyecto:
+
+assets/
+├── icon.png
+└── splash.png
+
+
+
+Asegúrate de que las dimensiones de los ficheros sean las correctas:
+
+   -   assets/icon.(png|jpg) tiene que ser al menos 1024×1024px
+   -   assets/splash.(png|jpg) tiene que ser al menos 2732×2732px
+
+
+
+Una vez tengamos esto podemos instalar el plugin para los assets de Capacitor y lanzar
+el comando generate en nuestro proyecto:
+
+npm install @capacitor/assets
+
+npx capacitor-assets generate
+
+
+
+Esto generará el icono y la imagen de carga en diferentes dimensiones y si todo va bien,
+las imágenes en el proyecto nativo estarán actualizadas.
+
+
+
+
+                                                                              4
+FIRMANDO LA APP
+Para publicar la app en la Play Store, necesitamos firmar nuestra App nativa con una
+firma digital, además de la cuenta de desarrollador de Google Play.
+
+
+
+Generamos una App firmada
+Vamos a ver la forma más fácil de crear nuestra App. Lo primero es compilar el proyecto
+para asegurarnos que tenemos la última versión compilada. En la terminal:
+
+ionic cap build android --prod
+
+ionic cap open android
+
+
+
+Ahora podemos seleccionar la opción del menú Build y hacer clic en Generate Signed
+Bundle/APK
+
+
+
+
+                                                                             5
+Esto abrirá una nueva ventana en la cual seleccionamos Android App Bundle.
+
+
+
+
+Hacemos clic en siguiente y se abrirá un dialog para elegir o crear una key store.
+
+
+
+
+La key store es la forma en la que puedes verificar con Google que eres el desarrolladors
+de la app. Si estamos creando una App simplemente hacemos clic en Create new para
+crear un nuevo fichero de key store.
+
+
+
+
+                                                                               6
+Después de rellenar los datos , nos saldrá un diálogo para confirmar las versión como
+release.
+
+
+
+
+Si   la    compilación   es   exitosa,   debería   crearse   un   fichero   en   la   ruta
+android/app/release/app-release.aab dentro del proyecto.
+
+
+
+
+                                                                                 7
+SUBIR LA APP
+Con el fichero aab ya podemos subir nuestra App a la Play Store.
+
+
+
+
+Rellena el formulario con la información general y haz click en Create app para añadir
+una nueva App a tu colección. Llegaremos al panel de control de tu proyecto, donde
+podemos bajar hasta la opción Set-up your app y completa todas las tareas para poder
+subir tu App.
+
+
+
+
+                                                                            8
+Una vez completados todos los formularios, solo queda ir a Production y hacer clic en el
+botón Create new release.
+
+
+
+
+El siguiente paso es el más importante, el paso de subir el archivo aab en la zona de carga
+de archivos.
+
+
+
+
+                                                                                 9
+Google detectará automáticamente la versión de nuestro fichero, así como otra
+información. Para actualizar es importante haber modificado la versión o si no no nos
+dejará subirla. Esto es dentro del proyecto de Android
+
+android  app  build.gradle  versionCode
+
+El siguiente paso es revisar la información y si todo está correcto podemos enviarla a
+producción en la opción Start roll-out to Production y esperar varios días a que sea
+publicada en la Play Store.
+
+
+
+
+                                                                            10
+

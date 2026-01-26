@@ -1,0 +1,38 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="ion-text-center">
+      <div class="logo-wrapper">
+        <ion-img class="app-logo" src="/assets/data/newsLogo.png" alt="Logo"></ion-img>
+      </div>
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-menu-button menu="primerMenu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  @for (noticia of noticias | slice:0:limiteActual; track noticia._id) {
+    <ion-card [routerLink]="['/noticia', noticia._id]">
+      <img [src]="getImagenPrincipal(noticia)" (error)="handleImageError($event)" />
+      <ion-card-content>
+        <h2>{{ noticia.title }}</h2>
+        <p>{{ noticia.author }}</p>
+      </ion-card-content>
+    </ion-card>
+  }
+
+  <ion-infinite-scroll
+    [disabled]="limiteActual >= noticias.length"
+    (ionInfinite)="cargarMas($event)"
+  >
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/buscar">
+      <ion-icon name="search"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

@@ -1,0 +1,167 @@
+IONIC V8
+Checkbox
+ÍNDICE
+Introducción            3
+Preparación             3
+    Componente          3
+    Icono               3
+    Json                4
+Ejemplo                 4
+    Lógica              4
+    Visualización       5
+
+
+
+
+                    2
+INTRODUCCIÓN
+Nos permiten la selección de múltiples opciones de una serie de opciones. Aparecerán
+como seleccionados cuando estén activos. Al hacer click en el checkbox activará la
+propiedad checked.
+
+
+
+La documentación del Checkbox está en la página:
+
+https://ionicframework.com/docs/api/checkbox
+
+
+
+
+PREPARACIÓN
+
+COMPONENTE
+
+
+Para empezar a trabajar con el checkbox vamos a necesitar una página donde usarlo.
+Creamos la página en la terminal:
+
+
+
+                 ionic g page pages/Checkbox --spec=false
+
+
+
+
+ICONO
+
+
+ addIcons({grid, … , search, checkmarkCircleOutline});
+}
+
+
+
+
+                                                                           3
+JSON
+
+Añadimos en nuestro menu.json el nuevo elemento que queremos que aparezca tanto
+en el menú como en la página de inicio.
+
+,{
+ "nombre": "Checkbox",
+ "ruta": "/checkbox",
+ "icono": "checkmark-circle-outline"
+}
+
+
+
+
+EJEMPLO
+
+LÓGICA
+
+En primer lugar vamos a crear un listado de objetos para realizar los configurar las
+opciones del checkbox desde el ts. En checkbox.page.ts:
+
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import      {   IonContent,     IonHeader,      IonTitle,    IonToolbar    }   from
+'@ionic/angular/standalone';
+
+
+@Component({
+ selector: 'app-checkbox',
+ templateUrl: './checkbox.page.html',
+ styleUrls: ['./checkbox.page.scss'],
+ standalone: true,
+     imports:      [IonContent,           IonHeader,      IonTitle,   IonToolbar,
+CommonModule, FormsModule]
+})
+export class CheckboxPage {
+
+
+ data = [
+     {
+         name: 'primary',
+
+
+
+
+                                                                           4
+         selected: false
+     }, {
+         name: 'secondary',
+         selected: true
+     }, {
+         name: 'tertiary',
+         selected: false
+     },
+     {
+         name: 'success',
+         selected: true
+     }
+ ];
+ constructor() { }
+
+
+ onClick( check: any ) {
+     console.log( check );
+ }
+}
+
+
+
+VISUALIZACIÓN
+
+Y en checkbox.page.html cargamos el listado de checkbox:
+
+
+
+<app-header titulo="Checkbox"></app-header>
+
+
+<ion-content>
+    <ion-list>
+      <ion-item>
+          <ion-label>Etiqueta</ion-label>
+          <ion-checkbox color="primary"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+
+
+    <ion-list>
+      <ion-list-header>Lista de checkbox</ion-list-header>
+      @for (c of data; track $index){
+
+
+
+
+                                                           5
+       <ion-item (click)="onClick( c )">
+         <ion-label>{{ c.name }}</ion-label>
+         <ion-checkbox [(ngModel)]="c.selected"
+                      [color]="c.name"
+                      mode="ios"
+         ></ion-checkbox>
+       </ion-item>
+   }
+</ion-list>
+</ion-content>
+
+
+
+
+                                                  6
+
