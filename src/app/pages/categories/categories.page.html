@@ -1,75 +1,45 @@
 <ion-header>
   <ion-toolbar>
-    <!-- Botón de retroceso -->
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
 
-    <!-- Logo centrado que lleva al inicio -->
     <ion-title class="ion-text-center">
       <ion-avatar class="header-avatar" (click)="goHome()">
         <ion-img src="assets/newsLogo.png" alt="Logo"></ion-img>
       </ion-avatar>
     </ion-title>
 
-    <!-- Botón del menú -->
     <ion-buttons slot="end">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-segment [value]="segmentValue" (ionChange)="segmentChanged($event)" color="secondary">
+      @for (section of sections; track section.name) {
+        <ion-segment-button [value]="section.name">
+          <ion-label>{{ section.name }}</ion-label>
+        </ion-segment-button>
+      }
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content class="ion-padding">
-  <swiper-container
-    slides-per-view="3.5"
-    space-between="10"
-    navigation="false"
-    pagination="false"
-    loop="true"
-    grab-cursor="true"
-    resistance-ratio="0.85"
-    longSwipes="true"
-    longSwipesRatio="0.3"
-    longSwipesMs="300"
-    threshold="5"
-    class="category-swiper-horizontal"
-  >
-    @for (section of sections; track section.name) {
-      <swiper-slide
-        (click)="selectSection(section.name)"
-        [class.selected]="selectedSection === section.name"
-        class="category-slide"
-      >
-        <ion-avatar class="category-avatar">
-          <ion-img [src]="section.icon" alt="{{ section.name }}"></ion-img>
-        </ion-avatar>
-        <p class="category-name">{{ section.name }}</p>
-      </swiper-slide>
-    }
-  </swiper-container>
-
   <ion-list>
     @for (noticia of filteredNoticias; track $index) {
       <ion-card (click)="goToNoticiasDetail(noticia._id)">
-        <ion-card-header>
-          <ion-card-title class="ion-text-capitalize">
-            {{ noticia.title }}
-          </ion-card-title>
-        </ion-card-header>
         <ion-card-content>
           <div class="card-content">
-            <ion-thumbnail>
-              <ion-img [src]="noticia.images" alt="Imagen de {{noticia.title}}"></ion-img>
-            </ion-thumbnail>
+            <ion-img class="news-image" [src]="noticia.images" alt="Imagen de {{noticia.title}}"></ion-img>
             <div class="card-details">
-              <div class="categories">
-                <ion-chip class="category-chip">
-                  {{ noticia.section }}
-                </ion-chip>
-              </div>
-              <p class="release-date">
-                <b>Fecha:</b> {{ noticia.date | date:'dd/MM/yyyy' }}
+              <ion-card-title class="ion-text-capitalize">
+                {{ noticia.title }}
+              </ion-card-title>
+              <p class="news-author">
+                <b>Autor:</b> {{ noticia.author }}
               </p>
             </div>
           </div>

@@ -10,7 +10,7 @@ import { NoticiasService } from '../../services/noticias.service';
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
-  imports: [IonicModule, CommonModule, RouterLink, HeaderPage],
+  imports: [IonicModule, CommonModule],
   standalone: true
 })
 export class HomePage implements OnInit {

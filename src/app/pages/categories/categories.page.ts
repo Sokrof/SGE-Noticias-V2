@@ -1,16 +1,12 @@
 import { Component, OnInit, OnDestroy, Input, CUSTOM_ELEMENTS_SCHEMA, inject, ChangeDetectorRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Seccion, Noticia } from '../../interfaces/noticias-interface';
-import { IonicModule, MenuController } from "@ionic/angular";
+import { IonicModule } from "@ionic/angular";
 import { NoticiasService } from "../../services/noticias.service";
-import { register } from "swiper/element/bundle";
 import { Subject, takeUntil } from "rxjs";
-import { Router, RouterLink } from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import { DatePipe } from "@angular/common";
 import { HeaderPage } from "../header/header.page";
 import { CategoryService } from "../../services/category-service";
-
-register();
 
 @Component({
   selector: 'app-categories',
@@ -21,17 +17,15 @@ register();
   imports: [IonicModule, RouterLink, DatePipe, HeaderPage]
 })
 export class CategoriesPage implements OnInit, OnDestroy {
-  @Input() categoryId: string | undefined; // Corregido con el input
+  @Input() categoryId: string | undefined;
   protected sections: Seccion[] = [];
-  protected noticias: Noticia[] = [];
   protected filteredNoticias: Noticia[] = [];
-  protected selectedSection: string | null = null;
+  protected segmentValue: string = '';
 
-  private readonly http: HttpClient = inject(HttpClient);
   private readonly router: Router = inject(Router);
   private noticiasService = inject(NoticiasService);
-  private menuCtrl = inject(MenuController);
   private destroy$ = new Subject<void>();
+  private readonly allowedSections = new Set(['Deportes', 'Economia', 'Mundo', 'Tecnologia']);
 
   constructor(
     private categoryService: CategoryService,
@@ -43,8 +37,7 @@ export class CategoriesPage implements OnInit, OnDestroy {
 
     this.categoryService.selectedCategory$.pipe(takeUntil(this.destroy$)).subscribe(sectionName => {
       if (sectionName) {
-        this.selectedSection = sectionName;
-        this.loadNoticiasForSection(sectionName);
+        this.setActiveSection(sectionName);
         this.cdr.detectChanges();
       }
     });
@@ -60,10 +53,11 @@ export class CategoriesPage implements OnInit, OnDestroy {
       .subscribe({
         next: (response) => {
           if (response) {
-            this.sections = response;
+            const filtered = response.filter(section => this.allowedSections.has(section.name));
+            this.sections = filtered.length > 0 ? filtered : response;
 
-            if (this.sections.length > 0 && !this.selectedSection) {
-              this.selectSection(this.sections[0].name);
+            if (this.sections.length > 0 && !this.segmentValue) {
+              this.setActiveSection(this.sections[0].name);
             }
           }
         },
@@ -71,8 +65,15 @@ export class CategoriesPage implements OnInit, OnDestroy {
       });
   }
 
-  selectSection(sectionName: string) {
-    this.selectedSection = sectionName;
+  segmentChanged(event: any) {
+    const sectionName = event.detail?.value;
+    if (sectionName) {
+      this.setActiveSection(sectionName);
+    }
+  }
+
+  private setActiveSection(sectionName: string) {
+    this.segmentValue = sectionName;
     this.categoryService.setCategory(sectionName);
     this.loadNoticiasForSection(sectionName);
   }
