@@ -5,17 +5,26 @@
             type="overlay"
             [swipeGesture]="true">
     <ion-header>
-      <ion-toolbar color="primary">
-        <ion-title>Menú</ion-title>
+      <ion-toolbar>
+        <ion-title class="ion-text-center">
+          <ion-avatar class="header-avatar" style="margin: auto; width: 60px; height: 60px;">
+            <ion-img src="assets/newsLogo.png" alt="Logo"></ion-img>
+          </ion-avatar>
+        </ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <ion-list *ngIf="categories.length > 0">
-        <ion-list-header>
-          <ion-label>Secciones</ion-label>
-        </ion-list-header>
-
+      <ion-list>
         <ion-menu-toggle auto-hide="true">
+          <!-- Inicio -->
+          <ion-item button (click)="goHome()" class="category-item">
+            <ion-avatar slot="start">
+               <ion-icon name="home" style="font-size: 24px; color: var(--ion-color-secondary);"></ion-icon>
+            </ion-avatar>
+            <ion-label>INICIO</ion-label>
+          </ion-item>
+
+          <!-- Secciones dinámicas -->
           <ion-item *ngFor="let category of categories"
                     (click)="selectCategory(category.name)"
                     button
@@ -23,7 +32,7 @@
             <ion-avatar slot="start">
               <ion-img [src]="category.icon" [alt]="category.name"></ion-img>
             </ion-avatar>
-            <ion-label>{{ category.name }}</ion-label>
+            <ion-label>{{ category.name | uppercase }}</ion-label>
           </ion-item>
         </ion-menu-toggle>
       </ion-list>
